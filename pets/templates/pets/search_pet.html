@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Lost Pet</title>
+</head>
+<body>
+
+<h2>Search Lost Pet by Image</h2>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Search</button>
+</form>
+
+
+{% if result %}
+    <h3>{{ result }}</h3>
+{% endif %}
+
+{% if matched_pet %}
+    <h4>Matched Pet Details</h4>
+    {{ matched_pet.image.url }}
+    <p>Name: {{ matched_pet.name }}</p>
+    <p>Age: {{ matched_pet.age }}</p>
+    <p>Type: {{ matched_pet.pet_type }}</p>
+{% endif %}
+
+</body>
+</html>

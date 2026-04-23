@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pet Gallery</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f4f4f4;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px #ccc;
+            text-align: center;
+        }
+        img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+<h2 style="text-align:center;">🐶🐱 Pet Gallery</h2>
+
+<div class="gallery">
+    {% for pet in pets %}
+    <div class="card">
+        <a href="{% url 'pet_detail' pet.id %}">
+            <img src="{{ pet.image.url }}" alt="pet image">
+            <h3>{{ pet.name }}</h3>
+            <p>Age: {{ pet.age }}</p>
+            <p>Type: {{ pet.pet_type }}</p>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+</body>
+</html>

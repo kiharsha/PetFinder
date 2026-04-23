@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+        }
+        .header {
+            background: #333;
+            color: white;
+            padding: 10px;
+        }
+        .pet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .card {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px #ccc;
+            text-align: center;
+        }
+        img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+        a {
+            color: white;
+            margin-right: 10px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h2>Welcome, {{ user.username }}</h2>
+    <a href="/">Gallery</a>
+    <a href="/logout/">Logout</a>
+    <a href="/add-lost-pet/">Add Lost Pet</a> 
+    <a href="/search/">Search Lost Pet</a>
+</div>
+
+<div class="container">
+    <h3>Your Pets</h3>
+
+    {% if pets %}
+    <div class="pet-grid">
+        {% for pet in pets %}
+        <div class="card">
+            <img src="{{ pet.image.url }}">
+            <h4>{{ pet.name }}</h4>
+            <p>Age: {{ pet.age }}</p>
+            <p>Type: {{ pet.pet_type }}</p>
+
+            {% if pet.is_lost %}
+                <p style="color:red;">Status: Lost</p>
+            {% else %}
+                <p style="color:green;">Status: Found</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        <p>You have not added any pets yet.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>
